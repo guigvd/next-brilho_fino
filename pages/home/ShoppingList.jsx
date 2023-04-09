@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { setItens } from "../../state";
 import { useDispatch, useSelector } from "react-redux";
+import Item from "../../components/Item";
 
 import { Tab, Tabs, useMediaQuery } from "@mui/material";
 
@@ -67,6 +68,23 @@ const ShoppingList = () => {
             />
           ))}
         </Tabs>
+      </div>
+
+      {/* SHOW ITEMS */}
+      <div
+        className="mt-10 w-full grid gap-5 justify-around"
+        style={{ gridTemplateColumns: "repeat(auto-fill, 300px)" }}
+      >
+        {valueCategory === "all" &&
+          items.map((item) => <Item key={item._id} {...item} />)}
+        {valueCategory === "anel" &&
+          anelItems.map((item) => <Item key={item._id} {...item} />)}
+        {valueCategory === "bracelete" &&
+          barceleteItems.map((item) => <Item key={item._id} {...item} />)}
+        {valueCategory === "brinco" &&
+          brincoItems.map((item) => <Item key={item._id} {...item} />)}
+        {valueCategory === "colar" &&
+          colarItems.map((item) => <Item key={item._id} {...item} />)}
       </div>
     </div>
   );

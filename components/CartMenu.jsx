@@ -1,5 +1,5 @@
 import { Button, Divider, Icon, IconButton, useMediaQuery } from "@mui/material";
-import CloseIcon from "@mui/icons-material/close";
+import CloseIcon from '@mui/icons-material/Close';
 import { useSelector, useDispatch } from 'react-redux';
 import { setIsCartOpen } from "../state";
 import { useContext } from "react";
