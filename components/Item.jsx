@@ -4,8 +4,10 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import Image from "next/image";
+import { addToCart } from "../state";
 
-const Item = ({ _id, picture, category, material, name, price }) => {
+const Item = ({ item, _id, picture, category, material, name, price }) => {
   //   const navigate = u;
   const [isHover, setIsHover] = useState(false);
   const [count, setCount] = useState(1);
@@ -17,9 +19,12 @@ const Item = ({ _id, picture, category, material, name, price }) => {
       onMouseOver={() => setIsHover(true)}
       onMouseOut={() => setIsHover(false)}
     >
-      <img
+      <Image
         src={`/${picture}`}
         className="object-cover h-[400px] w-[300px]"
+        alt={picture}
+        width="300"
+        height="400"
         // onClick={}
       />
       <div
@@ -41,6 +46,7 @@ const Item = ({ _id, picture, category, material, name, price }) => {
           <Button
             className="bg-gray-500 text-white text-sm rounded-sm"
             sx={{ fontFamily: "Cinzel" }}
+            onClick={() => dispatch(addToCart({ item: { ...item, count } }))}
           >
             ADD TO CART
           </Button>

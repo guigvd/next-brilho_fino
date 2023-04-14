@@ -19,7 +19,7 @@ const ShoppingList = () => {
 
   useEffect(() => {
     getItems();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // FILTER THINGS
   const [valueCategory, setValueCategory] = useState("all");
@@ -76,15 +76,15 @@ const ShoppingList = () => {
         style={{ gridTemplateColumns: "repeat(auto-fill, 300px)" }}
       >
         {valueCategory === "all" &&
-          items.map((item) => <Item key={item._id} {...item} />)}
+          items.map((item) => <Item item={item} key={item._id} {...item} />)}
         {valueCategory === "anel" &&
-          anelItems.map((item) => <Item key={item._id} {...item} />)}
+          anelItems.map((item) => <Item item={item} key={item._id} {...item} />)}
         {valueCategory === "bracelete" &&
-          barceleteItems.map((item) => <Item key={item._id} {...item} />)}
+          barceleteItems.map((item) => <Item item={item} key={item._id} {...item} />)}
         {valueCategory === "brinco" &&
-          brincoItems.map((item) => <Item key={item._id} {...item} />)}
+          brincoItems.map((item) => <Item item={item} key={item._id} {...item} />)}
         {valueCategory === "colar" &&
-          colarItems.map((item) => <Item key={item._id} {...item} />)}
+          colarItems.map((item) => <Item item={item} key={item._id} {...item} />)}
       </div>
     </div>
   );
