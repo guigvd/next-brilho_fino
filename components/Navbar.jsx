@@ -3,20 +3,19 @@ import { IconButton, Badge } from "@mui/material";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setIsCartOpen } from "../state";
-
-
-
+import Link from "next/link";
+import CartMenu from "./CartMenu";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart)
 
   return (
-    <nav className="w-full bg-white fixed z-10 border-b">
+    <nav className="w-full bg-white fixed z-20 border-b">
       <div className="w-5/6 mx-auto flex justify-between items-center my-4">
-        <div>
+        <Link href="/">
           <h1 className="text-xl text-purple-800">Brilho Fino</h1>
-        </div>
+        </Link>
         <div>
           <Badge
             badgeContent={cart.length}
@@ -32,6 +31,7 @@ const Navbar = () => {
           </Badge>
         </div>
       </div>
+      <CartMenu />
     </nav>
   );
 };

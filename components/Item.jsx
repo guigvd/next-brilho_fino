@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { addToCart } from "../state";
+import Link from "next/link";
 
 const Item = ({ item, _id, picture, category, material, name, price }) => {
   //   const navigate = u;
@@ -19,14 +20,17 @@ const Item = ({ item, _id, picture, category, material, name, price }) => {
       onMouseOver={() => setIsHover(true)}
       onMouseOut={() => setIsHover(false)}
     >
-      <Image
-        src={`/${picture}`}
-        className="object-cover h-[400px] w-[300px]"
-        alt={picture}
-        width="300"
-        height="400"
-        // onClick={}
-      />
+      <Link href={`../ItemDetails?id=${_id}`}>
+      {/* <Link href={`../ItemDetails/`}> */}
+        <Image
+          src={`/${picture}`}
+          className="object-cover h-[400px] w-[300px]"
+          alt={picture}
+          width="300"
+          height="400"
+        />
+      </Link>
+
       <div
         className={`${
           isHover ? "block" : "hidden"
