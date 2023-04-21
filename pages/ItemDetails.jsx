@@ -19,6 +19,14 @@ const ItemDetails = () => {
   const items = useSelector((state) => state.cart.items);
   const item = items.find((item) => item._id === id);
 
+  if (!item) {
+    return (
+      <div>
+        <p>Item not found</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Navbar />
