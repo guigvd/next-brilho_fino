@@ -20,8 +20,16 @@ const AddressForm = ({
         getIn(errors, formattedName(field))
     );
 
-    const formattedHelper = (field) =>
+  const formattedHelper = (field) =>
     getIn(touched, formattedName(field)) && getIn(errors, formattedName(field));
+
+  if (!values) {
+    return (
+      <div>
+        <p>ERRO 404</p>
+      </div>
+    );
+  }
 
   return (
     <div
