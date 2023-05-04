@@ -6,9 +6,17 @@ const Shipping = ({
   errors,
   handleChange,
   handleBlur,
-  setFieldValue,
 }) => {
+  if (!values) {
+    return (
+      <div>
+        <p>ERRO 404</p>
+      </div>
+    );
+  }
+
   return (
+
     <div className="mx-auto my-8">
       {/* BILLING FORM */}
       <div>
