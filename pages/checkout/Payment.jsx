@@ -1,6 +1,14 @@
 import { TextField } from "@mui/material";
 
 const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
+  if (!values) {
+    return (
+      <div>
+        <p>ERRO 404</p>
+      </div>
+    );
+  }
+  
   return (
     <div className="my-8 mx-0">
       {/* CONTACT INFO */}
@@ -12,8 +20,7 @@ const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
           label="Email"
           onBlur={handleBlur}
           onChange={handleChange}
-          // value={values.email}
-          value={values && values.email ? values.email : ''}
+          value={values.email}
           name="email"
           error={!!touched.email && !!errors.email}
           helperText={touched.email && errors.email}
