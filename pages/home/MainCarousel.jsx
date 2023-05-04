@@ -18,7 +18,7 @@ importAll(require.context("../../assets", false, /\.(png|jpe?g|svg)$/));
 const MainCarousel = () => {
   return (
       <Carousel
-      className="pt-16"
+        className="pt-[72px]"
         infiniteLoop={true}
         showThumbs={false}
         showIndicators={true}

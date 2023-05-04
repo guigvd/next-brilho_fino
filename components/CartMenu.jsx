@@ -16,6 +16,7 @@ import {
   decreaseCount,
   removeFromCart,
 } from "../state";
+import Link from "next/link";
 
 const CartMenu = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -68,7 +69,9 @@ const CartMenu = () => {
                     </IconButton>
                   </div>
 
-                  <p className="text-xs flex-1 pt-4 font-fauna">{item.shortDesc}</p>
+                  <p className="text-xs flex-1 pt-4 font-fauna">
+                    {item.shortDesc}
+                  </p>
 
                   <div className="flex justify-between items-center mt-2">
                     <div className="flex items-center rounded-sm border">
@@ -105,12 +108,15 @@ const CartMenu = () => {
           </div>
 
           {/* BUTTON */}
-          <Button
-            className="bg-neutral-800 hover:text-neutral-900 text-white text-xs rounded-sm w-full py-6 mt-4 font-bold"
-            sx={{ fontFamily: "Cinzel" }}
-          >
-            CHECKOUT
-          </Button>
+          <Link href="/Checkout">
+            <Button
+              className="bg-neutral-800 hover:text-neutral-900 text-white text-xs rounded-sm w-full py-6 mt-4 font-bold"
+              sx={{ fontFamily: "Cinzel" }}
+              onClick={() => dispatch(setIsCartOpen({}))}
+            >
+              CHECKOUT
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ const Navbar = () => {
   const cart = useSelector((state) => state.cart.cart)
 
   return (
-    <nav className="w-full bg-white fixed z-20 border-b">
+    <nav className="w-full bg-white/95 fixed z-20 border-b">
       <div className="w-5/6 mx-auto flex justify-between items-center my-4">
         <Link href="/">
           <h1 className="text-xl text-purple-800">Brilho Fino</h1>
