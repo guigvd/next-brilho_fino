@@ -12,7 +12,8 @@ const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
           label="Email"
           onBlur={handleBlur}
           onChange={handleChange}
-          value={values.email}
+          // value={values.email}
+          value={values && values.email ? values.email : ''}
           name="email"
           error={!!touched.email && !!errors.email}
           helperText={touched.email && errors.email}
