@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import Shipping from "./checkout/Shipping";
 import Payment from "./checkout/Payment";
 
-import { Button, Stepper, Step, StepLabel } from "@mui/material";
+import { Stepper, Step, StepLabel } from "@mui/material";
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
@@ -150,24 +150,22 @@ const Checkout = () => {
 
                 <div className="flex justify-between gap-12">
                   {!isFirstStep && (
-                    <Button
-                      fullWidth
+                    <button
                       color="secondary"
                       variant="contained"
-                      className="bg-neutral-800 hover:bg-neutral-800/5 hover:text-neutral-800 border-r-0 py-4 px-10"
+                      className="bg-neutral-800 hover:bg-transparent hover:text-neutral-800 text-white shadow-sm border-r-0 py-4 px-10 w-full "
                       onClick={() => setActiveStep(activeStep - 1)}
                     >
                       Voltar
-                    </Button>
+                    </button>
                   )}
-                  <Button
-                    fullWidth
+                  <button
                     type="submit"
                     variant="contained"
-                    className="bg-neutral-800 hover:bg-neutral-800/5 hover:text-neutral-800 border-r-0 py-4 px-10 "
+                    className="bg-neutral-800 hover:bg-transparent hover:text-neutral-800 text-white shadow-sm border-r-0 py-4 px-10 w-full"
                   >
                     {!isSecondStep ? "Próximo" : "Fazer Pedido"}
-                  </Button>
+                  </button>
                 </div>
               </form>
             )}

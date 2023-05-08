@@ -1,7 +1,4 @@
 import {
-  Button,
-  Divider,
-  Icon,
   IconButton,
   useMediaQuery,
 } from "@mui/material";
@@ -109,13 +106,13 @@ const CartMenu = () => {
 
           {/* BUTTON */}
           <Link href="/Checkout">
-            <Button
-              className="bg-neutral-800 hover:text-neutral-900 text-white text-xs rounded-sm w-full py-6 mt-4 font-bold"
+            <button
+              className="bg-neutral-800 hover:bg-transparent hover:text-neutral-900 text-white text-xs rounded-sm w-full py-6 mt-4 font-bold transition duration-200"
               sx={{ fontFamily: "Cinzel" }}
               onClick={() => dispatch(setIsCartOpen({}))}
             >
               CHECKOUT
-            </Button>
+            </button>
           </Link>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
@@ -62,15 +62,15 @@ const ItemDetails = () => {
                 </IconButton>
               </div>
 
-              <Button
-                className="bg-neutral-800 text-white p-2 text-sm rounded-sm"
+              <button
+                className="bg-neutral-800 hover:bg-transparent text-white hover:text-neutral-800 p-2 text-sm rounded-sm transition duration-200"
                 sx={{ fontFamily: "Cinzel" }}
                 onClick={() =>
                   dispatch(addToCart({ item: { ...item, count } }))
                 }
               >
                 ADD TO CART
-              </Button>
+              </button>
             </div>
           </div>
         </div>
