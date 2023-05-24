@@ -29,13 +29,13 @@ const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
         <TextField
           fullWidth
           type="text"
-          label="Phone Number"
+          label="Name"
           onBlur={handleBlur}
           onChange={handleChange}
-          value={values.phoneNumber}
-          name="phoneNumber"
-          error={!!touched.phoneNumber && !!errors.phoneNumber}
-          helperText={touched.phoneNumber && errors.phoneNumber}
+          value={values.name}
+          name="name"
+          error={!!touched.name && !!errors.name}
+          helperText={touched.name && errors.name}
           sx={{ gridColumn: "span 4" }}
         />
       </div>

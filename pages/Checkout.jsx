@@ -15,6 +15,8 @@ import * as yup from "yup";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
+import { loadStripe } from "@stripe/stripe-js";
+
 // STYLE STEPPER
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -75,6 +77,11 @@ function QontoStepIcon(props) {
   );
 }
 
+// STRIPE THINGS
+const stripePromise = loadStripe(
+  "pk_test_51M9ZzlHbou1FRQSamFf8SwIVLdDEj1ebineJAOKi2ipn0CAhlfzQvadGECNGQY7ITt8EECEUxxKYhUqNo4GvFSRv007aDaapj4"
+);
+
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
   const cart = useSelector((state) => state.cart.cart);
@@ -83,15 +90,43 @@ const Checkout = () => {
 
   const handleFormSubmit = async (values, actions) => {
     setActiveStep(activeStep + 1);
-  
-    // this copies the billing address onto shipping address
-    if (isFirstStep && values.shippingAddress.isSameAddress) {
-      actions.setFieldValue("shippingAddress", {
-        ...values.billingAddress,
-        isSameAddress: true,
-      });
+
+    if (isSecondStep) {
+      makePayment(values);
     }
+
+    actions.setTouched({});
   };
+
+  async function makePayment(values) {
+    const stripe = await stripePromise;
+    const requestBody = {
+      name: values.name,
+      email: values.email,
+      products: cart.map(({ _id, name, price, count }) => ({
+        _id,
+        name,
+        price,
+        count,
+      })),
+    };
+
+    const response = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestBody),
+    });
+
+    const sessionId = await response.json();
+    const sessionIdString = sessionId.sessionId;
+
+    await stripe.redirectToCheckout(
+      {
+        sessionId: sessionIdString,
+      },
+      console.log("idteste")
+    );
+  }
 
   return (
     <div className="h-screen flex flex-col">
@@ -190,19 +225,6 @@ const initialValues = {
     state: "",
     zipCode: "",
   },
-  shippingAddress: {
-    isSameAddress: true,
-    firstName: "",
-    lastName: "",
-    country: "",
-    street1: "",
-    street2: "",
-    city: "",
-    state: "",
-    zipCode: "",
-  },
-  email: "",
-  phoneNumber: "",
 };
 
 const checkoutSchema = [
@@ -217,42 +239,10 @@ const checkoutSchema = [
       state: yup.string().required("required"),
       zipCode: yup.string().required("required"),
     }),
-    shippingAddress: yup.object().shape({
-      isSameAddress: yup.boolean(),
-      firstName: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      lastName: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      country: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      street1: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      street2: yup.string(),
-      city: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      state: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      zipCode: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-    }),
   }),
   yup.object().shape({
     email: yup.string().required("required"),
-    phoneNumber: yup.string().required("required"),
+    name: yup.string().required("required"),
   }),
 ];
 

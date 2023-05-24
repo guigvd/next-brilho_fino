@@ -14,8 +14,20 @@ export const cartSlice = createSlice({
       state.items = action.payload;
     },
 
+    // addToCart: (state, action) => {
+    //   state.cart = [...state.cart, action.payload.item];
+    // },
+
+    // GPT
     addToCart: (state, action) => {
-      state.cart = [...state.cart, action.payload.item];
+      const newItem = action.payload.item;
+      const existingItem = state.cart.find(item => item._id === newItem._id);
+
+      if (existingItem) {
+        existingItem.count++; // Incrementa a quantidade do item existente
+      } else {
+        state.cart.push(newItem); // Adiciona um novo item ao carrinho
+      }
     },
 
     removeFromCart: (state, action) => {
@@ -40,7 +52,7 @@ export const cartSlice = createSlice({
     //   });
     // },
     
-    // USING CHATGPT FOR THIS
+    // GPT
     decreaseCount: (state, action) => {
       state.cart = state.cart.map((item) => {
         if (item._id === action.payload._id) {
@@ -51,9 +63,6 @@ export const cartSlice = createSlice({
         }
         return item;
       }).filter((item) => item !== null); // removemos os itens marcados como nulos
-    
-      // Alternativamente, podemos usar a seguinte linha em vez do filter acima:
-      // state.cart = state.cart.filter((item) => item !== null);
     },
     
     setIsCartOpen: (state) => {
