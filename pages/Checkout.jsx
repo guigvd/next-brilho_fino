@@ -225,6 +225,8 @@ const initialValues = {
     state: "",
     zipCode: "",
   },
+  email: "",
+  name: "",
 };
 
 const checkoutSchema = [
