@@ -44,6 +44,8 @@ Study in practice.
 - Material UI
 - Redux
 - Formik
+- Stripe
+- MongoDB
 
 ##
 
